@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">JikeNoteDemo</string>
+    <string name="title_activity_add_note">AddNote</string>
+    <string name="txzdsj">提醒整点时间：</string>
+    <string name="tvEvent">事件内容：</string>
+    <string name="btnSave">存储</string>
+</resources>
