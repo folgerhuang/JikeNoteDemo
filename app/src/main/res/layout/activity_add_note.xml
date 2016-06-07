@@ -23,6 +23,7 @@
             android:id="@+id/etHour"
             android:inputType="number"
             android:numeric="integer"
+            android:hint="请输入0-23之间的整数小时"
             android:maxLength="2"
             android:singleLine="true"
             android:layout_width="match_parent"
