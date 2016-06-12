@@ -20,6 +20,15 @@ public class NotificationBean implements Serializable {
 
     }
 
+    @Override
+    public String toString() {
+        return "NotificationBean{" +
+                "id=" + id +
+                ", hour=" + hour +
+                ", event='" + event + '\'' +
+                '}';
+    }
+
     public long getId() {
         return id;
     }

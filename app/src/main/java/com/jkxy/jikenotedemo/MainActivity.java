@@ -105,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
             notificationBeanList.add(notification);
             dbManager.insert(notification);
 
-
+            myAdapter.notifyDataSetChanged();
 
 
 
