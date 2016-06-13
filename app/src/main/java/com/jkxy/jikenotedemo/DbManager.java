@@ -22,11 +22,6 @@ public class DbManager {
         db = helper.getWritableDatabase();
     }
 
-    /**
-     * add NotificationBeans
-     *
-     * @param persons
-     */
     public void add(List<NotificationBean> lists) {
         db.beginTransaction();  //开始事务
         try {

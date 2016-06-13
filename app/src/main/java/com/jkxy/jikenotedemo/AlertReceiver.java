@@ -14,21 +14,19 @@ import android.util.Log;
 public class AlertReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.e("msg","I have got the msg!");
-
         NotificationBean notification = (NotificationBean) intent.getSerializableExtra("data");
         Log.e("data",notification.toString());
 
         creatNotification(context,"Times Up",notification.getHour()+":"+notification.getEvent(),"Alert");
     }
 
-    private void creatNotification(Context context, String s, String s1, String alert) {
+    private void creatNotification(Context context, String title, String content, String alert) {
         PendingIntent notificIntent=PendingIntent.getActivity(context,0,new Intent(context,MainActivity.class),0);
         NotificationCompat.Builder mBuilder=new NotificationCompat.Builder(context)
                 .setSmallIcon(R.mipmap.ic_launcher)
-                .setContentTitle(s)
+                .setContentTitle(title)
                 .setTicker(alert)
-                .setContentText(s1);
+                .setContentText(content);
         mBuilder.setContentIntent(notificIntent);
         mBuilder.setDefaults(NotificationCompat.DEFAULT_SOUND);
         mBuilder.setAutoCancel(true);

@@ -11,12 +11,14 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v7.app.AppCompatActivity;
+import android.text.TextUtils;
 import android.text.format.*;
 import android.text.format.DateUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
@@ -55,31 +57,16 @@ public class AddNote extends AppCompatActivity implements View.OnClickListener {
     }
 
     private void createNotification() {
-        if (etHour.getText().toString().trim().compareTo("") != 0 && etEvent.getText().toString().trim().compareTo("") != 0 && Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN) {
-            if (Integer.parseInt(etHour.getText().toString().trim()) >= 0 && Integer.parseInt(etHour.getText().toString().trim()) <= 23) {
+        String strHour = etHour.getText().toString().trim();
+        String strEvent=etEvent.getText().toString().trim();
+        if (!TextUtils.isEmpty(strHour) && !TextUtils.isEmpty(strEvent)) {
+            if (Integer.parseInt(strHour) >= 0 && Integer.parseInt(strHour) <= 23) {
                 Intent i = new Intent();
                 long id = System.currentTimeMillis();
-                int hour = Integer.parseInt(etHour.getText().toString().trim());
+                int hour = Integer.parseInt(strHour);
 
                 String event = etEvent.getText().toString();
                 i.putExtra("data", new NotificationBean(id, hour, event));
-
-               Intent intent = new Intent(this, AlertReceiver.class);
-                intent.putExtra("data",new NotificationBean(id,hour,event));
-                PendingIntent sender = PendingIntent.getBroadcast(this,hour, intent, PendingIntent.FLAG_CANCEL_CURRENT);
-
-                // Schedule the alarm!
-                AlarmManager am = (AlarmManager)getSystemService(Context.ALARM_SERVICE);
-
-                Calendar calendar = Calendar.getInstance();
-                calendar.set(Calendar.HOUR_OF_DAY, hour);
-                calendar.set(Calendar.MINUTE, 3);
-                calendar.set(Calendar.SECOND, 0);
-                calendar.set(Calendar.MILLISECOND, 0);
-                Log.e("alarm time",calendar.getTime()+"");
-                am.setRepeating(AlarmManager.RTC_WAKEUP, calendar.getTimeInMillis(),
-                        DateUtils.MINUTE_IN_MILLIS*1, sender);
-
 
                 setResult(RESULT_OK, i);
 
